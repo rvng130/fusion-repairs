@@ -122,10 +122,10 @@ export const site = {
   /**
    * YOUTUBE VIDEO — paste the link to your PC build video, e.g.
    * 'https://www.youtube.com/watch?v=XXXXXXXXXXX' or 'https://youtu.be/XXXXXXXXXXX'.
-   * Leave '' to show an empty placeholder (or hide it with showPhotoPlaceholders: false).
+   * Leave '' to hide the section.
    */
   youtube: {
-    url: 'https://www.youtube.com/watch?v=lo6jNB81ULY',
+    url: '',
     title: 'Watch us build a PC',
     /** Optional line under the title, e.g. 'Ryzen 7 + RTX 4070 build, start to finish.' */
     description: '',
