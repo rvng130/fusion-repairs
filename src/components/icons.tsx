@@ -44,10 +44,11 @@ export const IconClose = ({ size }: P) => (
   </svg>
 )
 
-/** Fusion Repair mark: two overlapping rings */
-export const Mark = ({ size = 26 }: P) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden focusable={false}>
-    <circle cx="12" cy="16" r="8.5" fill="none" stroke="var(--blue)" strokeWidth="3" />
-    <circle cx="20" cy="16" r="8.5" fill="none" stroke="var(--text)" strokeWidth="3" />
+/** Fusion Repair mark: a sage green and a white circle, fused */
+export const Mark = ({ size = 30 }: P) => (
+  <svg width={Math.round((size * 54) / 38)} height={size} viewBox="5 13 54 38" aria-hidden focusable={false} className="mark">
+    <circle cx="24" cy="32" r="17" fill="#8fb39d" />
+    <circle cx="40" cy="32" r="17" fill="#ffffff" fillOpacity="0.82" stroke="#232a27" strokeWidth="2.5" />
+    <circle cx="24" cy="32" r="17" fill="none" stroke="#232a27" strokeWidth="2.5" />
   </svg>
 )
