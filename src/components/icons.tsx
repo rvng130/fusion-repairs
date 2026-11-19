@@ -44,7 +44,7 @@ export const IconClose = ({ size }: P) => (
   </svg>
 )
 
-/** Fusion Repair mark: a sage green and a white circle, fused */
+/** Fusion Repairs mark: a sage green and a white circle, fused */
 export const Mark = ({ size = 30 }: P) => (
   <svg width={Math.round((size * 54) / 38)} height={size} viewBox="5 13 54 38" aria-hidden focusable={false} className="mark">
     <circle cx="24" cy="32" r="17" fill="#8fb39d" />

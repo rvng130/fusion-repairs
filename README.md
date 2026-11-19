@@ -1,4 +1,4 @@
-# Fusion Repair website
+# Fusion Repairs website
 
 React + Vite + TypeScript. Five pages (Home, Services & Pricing, How It Works, About, Contact Us). Every booking button opens the visitor's email app with a subject line and a prefilled message to the booking email.
 

@@ -14,7 +14,7 @@ export function youtubeId(url: string): string | null {
 export function YouTubeSection() {
   const { url, title, description } = site.youtube
   const id = youtubeId(url)
-  if (url && !id) console.warn(`[Fusion Repair] Couldn't read a YouTube video id from "${url}".`)
+  if (url && !id) console.warn(`[Fusion Repairs] Couldn't read a YouTube video id from "${url}".`)
   if (!id) return null // no link = section hidden
   return (
     <section className="section" aria-labelledby="yt-title">

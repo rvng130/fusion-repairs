@@ -57,7 +57,7 @@ export type Promo = {
 }
 
 export const site = {
-  name: 'Fusion Repair',
+  name: 'Fusion Repairs',
 
   /**
    * BOOKING EMAIL — every "Email Us to Book" button opens a draft to this address.
@@ -136,11 +136,11 @@ export const site = {
   /** Prefilled email drafts. Brackets are for the customer to fill in. */
   messages: {
     default:
-      "Hi Fusion Repair, I'd like help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+      "Hi Fusion Repairs, I'd like help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
     spanish:
-      'Hola Fusion Repair, me gustaría ayuda con mi [dispositivo/modelo]. El problema es [descripción breve]. Estoy cerca de [Norwalk/Stamford].',
+      'Hola Fusion Repairs, me gustaría ayuda con mi [dispositivo/modelo]. El problema es [descripción breve]. Estoy cerca de [Norwalk/Stamford].',
     buyback:
-      "Hi Fusion Repair, I have a [device/model] I'd like to sell. Condition: [condition]. I've attached a few photos.",
+      "Hi Fusion Repairs, I have a [device/model] I'd like to sell. Condition: [condition]. I've attached a few photos.",
   },
 
   payments: ['Cash', 'Venmo', 'Zelle'],
@@ -161,7 +161,7 @@ export const site = {
       ],
       price: null,
       message:
-        "Hi Fusion Repair, I need help with my [PC/laptop model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I need help with my [PC/laptop model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
@@ -172,7 +172,7 @@ export const site = {
       includes: ['Software, settings & slow-computer fixes', 'Setup help & how-to questions'],
       price: null,
       message:
-        "Hi Fusion Repair, I'd like remote help with my Windows [PC/laptop]. The issue is [short description]. Good times to connect: [days/times].",
+        "Hi Fusion Repairs, I'd like remote help with my Windows [PC/laptop]. The issue is [short description]. Good times to connect: [days/times].",
       visible: true,
     },
     {
@@ -182,7 +182,7 @@ export const site = {
       includes: ['RAM, SSD & GPU upgrades', 'Part picking for your budget', 'Custom PC builds'],
       price: null,
       message:
-        "Hi Fusion Repair, I'm interested in [an upgrade/a custom PC build]. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'm interested in [an upgrade/a custom PC build]. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
@@ -192,7 +192,7 @@ export const site = {
       includes: ['Data transfer to a new phone (photos, contacts, messages)', 'Phone troubleshooting'],
       price: null,
       message:
-        "Hi Fusion Repair, I'd like help with my [phone model]. I need [data transfer/troubleshooting]: [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like help with my [phone model]. I need [data transfer/troubleshooting]: [short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
@@ -201,7 +201,7 @@ export const site = {
       description: 'Dust buildup makes consoles run hot and loud. We open it up and clean it out.',
       price: 50,
       message:
-        "Hi Fusion Repair, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
 
@@ -213,7 +213,7 @@ export const site = {
       price: 75,
       priceNote: 'local house call',
       message:
-        "Hi Fusion Repair, I'd like a house call for [Wi-Fi/printer] setup. I'm in [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like a house call for [Wi-Fi/printer] setup. I'm in [Norwalk/Stamford].",
       visible: false,
     },
     {
@@ -222,7 +222,7 @@ export const site = {
       description: "No picture? A damaged HDMI port is a common cause. Email us and we'll take a look.",
       price: null,
       message:
-        "Hi Fusion Repair, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm near [Norwalk/Stamford].",
       visible: false,
     },
     {
@@ -231,7 +231,7 @@ export const site = {
       description: "Tell us the model and what's broken.",
       price: null,
       message:
-        "Hi Fusion Repair, I need my [phone model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I need my [phone model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
       visible: false,
     },
   ] satisfies Service[] as Service[],
@@ -254,7 +254,7 @@ export const site = {
         idVerification: '[EDIT: e.g. "No ID needed" or "Valid ID required at pickup" — or leave empty]',
         ends: '',
         message:
-          "Hi Fusion Repair, I'd like to use the 10% off first service offer. I need help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+          "Hi Fusion Repairs, I'd like to use the 10% off first service offer. I need help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
       },
       {
         id: 'holiday',
@@ -264,7 +264,7 @@ export const site = {
         idVerification: '',
         ends: '[EDIT: e.g. Ends Dec 31]',
         message:
-          "Hi Fusion Repair, I saw the holiday deal. I'm interested in [custom PC build/console cleaning]. I'm near [Norwalk/Stamford].",
+          "Hi Fusion Repairs, I saw the holiday deal. I'm interested in [custom PC build/console cleaning]. I'm near [Norwalk/Stamford].",
       },
     ] satisfies Promo[] as Promo[],
   },

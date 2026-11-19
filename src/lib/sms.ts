@@ -13,7 +13,7 @@ export const phoneReady = phoneE164 !== null
 
 if (site.phone && !phoneReady) {
   console.error(
-    `[Fusion Repair] site.phone "${site.phone}" isn't a valid 10-digit US number, so it's hidden.`,
+    `[Fusion Repairs] site.phone "${site.phone}" isn't a valid 10-digit US number, so it's hidden.`,
   )
 }
 
@@ -63,13 +63,13 @@ export function activePromo(): Promo | null {
   if (!site.promo.enabled) return null
   const p = site.promo.drafts.find((d) => d.id === site.promo.activeId)
   if (!p) {
-    console.warn(`[Fusion Repair] promo.activeId "${site.promo.activeId}" not found.`)
+    console.warn(`[Fusion Repairs] promo.activeId "${site.promo.activeId}" not found.`)
     return null
   }
   const unfinished = Object.values(p).some((v) => typeof v === 'string' && v.includes('[EDIT'))
   if (unfinished) {
     console.warn(
-      `[Fusion Repair] Promo "${p.id}" still has [EDIT …] placeholders, so the banner is hidden. Fill them in to publish.`,
+      `[Fusion Repairs] Promo "${p.id}" still has [EDIT …] placeholders, so the banner is hidden. Fill them in to publish.`,
     )
     return null
   }
