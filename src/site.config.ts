@@ -2,8 +2,8 @@
  * ============================================================
  *  FUSION REPAIR — SITE SETTINGS
  *  Everything you'd normally want to change lives in this file:
- *  business number, services, prices, promos, payment methods,
- *  team, and the prefilled text messages.
+ *  business number, services, prices, photos, promos, payment
+ *  methods, team, and the prefilled text messages.
  *
  *  After editing, run `npm run dev` to preview or `npm run build`
  *  to make a deployable copy. See README.md.
@@ -14,7 +14,7 @@ export type Service = {
   /** Unique id, used in links like /services#console-cleaning */
   id: string
   name: string
-  /** One-line description used on cards */
+  /** One-line description */
   description: string
   /** Number in dollars, or null to show "Request a quote" */
   price: number | null
@@ -27,6 +27,15 @@ export type Service = {
   message: string
   /** false = hidden from the site (kept here so you can turn it on later) */
   visible: boolean
+}
+
+export type Photo = {
+  /** Path to the image, e.g. '/photos/build-1.jpg' (file goes in /public/photos). Leave '' for an empty slot. */
+  src: string
+  /** Describe the photo for screen readers, e.g. 'White mini-ITX build with RTX 4070' */
+  alt: string
+  /** Optional caption shown under the photo */
+  caption?: string
 }
 
 export type Promo = {
@@ -56,21 +65,45 @@ export const site = {
   phone: '',
 
   serviceArea: ['Norwalk', 'Stamford'] as const,
+  /** Shown wherever the site describes where you work */
+  serviceAreaText: 'Stamford, Norwalk & surrounding areas',
   state: 'CT',
 
   /** Show "Se habla español" and the Spanish text button */
   spanish: true,
 
-  hero: {
-    /**
-     * Swap in your own bench photo: drop a file in /public (e.g. public/hero.jpg)
-     * and set src: '/hero.jpg'. Your real bench beats any stock photo.
-     */
-    image: {
-      src: 'https://images.pexels.com/photos/6754846/pexels-photo-6754846.jpeg?auto=compress&cs=tinysrgb&w=1600',
-      alt: 'A technician working on the inside of a computer at a repair bench',
-      credit: 'Photo: Tima Miroshnichenko / Pexels',
-    },
+  /** Your bio copy */
+  bio: {
+    headline: 'Your local solution for all things tech.',
+    intro: 'We specialize in computer repair, troubleshooting, upgrades, and custom PC builds.',
+    tagline: ['Reliable Service.', 'Affordable Solutions.', 'Technology Made Simple.'],
+    closing: 'Message us today for questions, service inquiries, or a quote!',
+  },
+
+  /**
+   * PHOTOS — put image files in /public/photos and enter the path, e.g. '/photos/hero.jpg'.
+   * Empty slots ('') show a labeled placeholder box while showPhotoPlaceholders is true.
+   * Set showPhotoPlaceholders: false to hide any slots you haven't filled before launch.
+   * Tip: square-ish photos (around 1600px wide) look best. Phone photos work fine.
+   */
+  showPhotoPlaceholders: true,
+  photos: {
+    hero: { src: '', alt: 'A PC open on our repair bench', caption: '' } as Photo,
+    builds: [
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+    ] as Photo[],
+    /** Parts boxes, the bench, tools, consoles — "tech stuff" */
+    bench: [
+      { src: '', alt: '', caption: 'Parts boxes' },
+      { src: '', alt: '', caption: 'The bench' },
+      { src: '', alt: '', caption: 'Tools' },
+      { src: '', alt: '', caption: 'Console cleaning' },
+    ] as Photo[],
   },
 
   /** Prefilled text drafts. Brackets are for the customer to fill in. */
@@ -90,20 +123,54 @@ export const site = {
 
   services: [
     {
-      id: 'pc-repair',
-      name: 'PC troubleshooting & repair',
-      description:
-        "Hardware or software — won't boot, crashing, running slow, strange noises. We find the cause and fix it.",
+      id: 'pc-laptop-repair',
+      name: 'PC & laptop repair',
+      description: "Won't turn on, won't boot, cracked hinge, bad port. Tell us what's going on.",
       price: null,
       message:
-        "Hi Fusion Repair, I'd like help with my PC. Model/specs: [model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repair, I need my [PC/laptop model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
+      visible: true,
+    },
+    {
+      id: 'diagnostics',
+      name: 'Hardware diagnostics & troubleshooting',
+      description: 'Crashing, overheating, strange noises, random restarts. We track down the cause.',
+      price: null,
+      message:
+        "Hi Fusion Repair, I'd like my [device/model] diagnosed. What's happening: [short description]. I'm near [Norwalk/Stamford].",
+      visible: true,
+    },
+    {
+      id: 'upgrades',
+      name: 'Hardware upgrades',
+      description: 'RAM, SSD, GPU, and more. We help you pick the part and install it.',
+      price: null,
+      message:
+        "Hi Fusion Repair, I'd like to upgrade the [RAM/SSD/GPU] in my [PC/laptop model]. I'm near [Norwalk/Stamford].",
+      visible: true,
+    },
+    {
+      id: 'windows-software',
+      name: 'Windows installation & software support',
+      description: 'Fresh Windows installs, updates gone wrong, and programs that won\'t cooperate.',
+      price: null,
+      message:
+        "Hi Fusion Repair, I need help with [Windows install/software issue] on my [PC/laptop model]. I'm near [Norwalk/Stamford].",
+      visible: true,
+    },
+    {
+      id: 'virus-removal',
+      name: 'Virus & malware removal',
+      description: 'Pop-ups, slowdowns, or something you clicked that you shouldn\'t have.',
+      price: null,
+      message:
+        "Hi Fusion Repair, I think my [PC/laptop model] has a virus. What I'm seeing: [short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
       id: 'custom-pc',
       name: 'Custom PC builds',
-      description:
-        'Tell us your budget and what you want to run. We help pick the parts and build it for you.',
+      description: 'Tell us your budget and what you want to run. We help pick the parts and build it.',
       price: null,
       message:
         "Hi Fusion Repair, I'm interested in a custom PC build. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
@@ -112,8 +179,7 @@ export const site = {
     {
       id: 'console-cleaning',
       name: 'PS5 & Xbox cleaning',
-      description:
-        'Dust buildup makes consoles run hot and loud. We open it up and clean it out.',
+      description: 'Dust buildup makes consoles run hot and loud. We open it up and clean it out.',
       price: 50,
       message:
         "Hi Fusion Repair, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm near [Norwalk/Stamford].",
@@ -122,8 +188,7 @@ export const site = {
     {
       id: 'phone-transfer',
       name: 'Phone data transfer',
-      description:
-        'Moving to a new phone? We help bring over your photos, contacts, and messages.',
+      description: 'Moving to a new phone? We help bring over your photos, contacts, and messages.',
       price: null,
       message:
         "Hi Fusion Repair, I'd like help moving my data from my [old phone model] to my [new phone model]. I'm near [Norwalk/Stamford].",
@@ -132,11 +197,19 @@ export const site = {
     {
       id: 'phone-troubleshooting',
       name: 'Phone troubleshooting',
-      description:
-        'Settings, apps, storage, or something just acting weird. Tell us what\'s happening and we\'ll take a look.',
+      description: "Settings, apps, storage, or something acting weird. We'll take a look.",
       price: null,
       message:
         "Hi Fusion Repair, I'd like help with my [phone model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+      visible: true,
+    },
+    {
+      id: 'tech-support',
+      name: 'General tech support',
+      description: "Not sure what category it falls under? Text us anyway.",
+      price: null,
+      message:
+        "Hi Fusion Repair, I have a tech question about my [device]. [Short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
 
@@ -154,7 +227,7 @@ export const site = {
     {
       id: 'ps5-hdmi',
       name: 'PS5 HDMI port repair',
-      description: 'No picture? A damaged HDMI port is a common cause. Text us and we\'ll take a look.',
+      description: "No picture? A damaged HDMI port is a common cause. Text us and we'll take a look.",
       price: null,
       message:
         "Hi Fusion Repair, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm near [Norwalk/Stamford].",
@@ -163,7 +236,7 @@ export const site = {
     {
       id: 'phone-repair',
       name: 'Phone repair',
-      description: 'Tell us the model and what\'s broken.',
+      description: "Tell us the model and what's broken.",
       price: null,
       message:
         "Hi Fusion Repair, I need my [phone model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
@@ -205,7 +278,7 @@ export const site = {
   },
 
   team: [
-    // To add a photo: put the file in /public (e.g. public/team/andrew.jpg) and set photo: '/team/andrew.jpg'
+    // Photo: put the file in /public/photos (e.g. public/photos/andrew.jpg) and set photo: '/photos/andrew.jpg'
     { name: 'Andrew Ishikawa', role: 'CEO', photo: '' },
     { name: 'Daniel Sarria', role: 'Head Technician', photo: '' },
   ],

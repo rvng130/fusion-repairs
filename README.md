@@ -23,9 +23,23 @@ To test on your phone, run `npm run dev -- --host` and open the "Network" URL it
 | Text drafts | `messages` (default, Spanish, buyback) plus each service's `message`. `{price}` fills in that service's price |
 | Payment methods | `payments: ['Cash', 'Venmo', 'Zelle']` |
 | Promo banner | `promo` (see below) |
-| Team / photos | `team`: put photos in `public/team/` and set `photo: '/team/andrew.jpg'` |
-| Hero photo | `hero.image.src`: put your own bench photo in `public/hero.jpg` and set `src: '/hero.jpg'` |
+| Bio copy (headline, intro, tagline, closing line) | `bio` |
+| Photos (hero, builds, bench) | `photos`: see "Adding photos" below |
+| Team photos | `team`: `photo: '/photos/andrew.jpg'` |
 | Spanish | `spanish: false` hides "Se habla español" and the Spanish buttons |
+
+### Adding photos
+1. Put your image files in `public/photos/` (create the folder). Phone photos are fine. Around 1600px wide keeps the site fast.
+2. In `site.config.ts`, set the slot's `src` to the path, e.g. `src: '/photos/build-1.jpg'`, and write a short `alt` describing it (screen readers read this aloud).
+3. Build captions (e.g. `'White mini-ITX build, Ryzen 7 / RTX 4070'`) show under each photo once it's filled.
+
+Slots:
+- `photos.hero`: the big photo at the top of the home page
+- `photos.builds`: "PCs we've built" gallery (6 slots; add or delete entries freely)
+- `photos.bench`: "On the bench" gallery for parts boxes, tools, consoles (4 slots)
+- `team[].photo`: you two, shown on Home and About
+
+Empty slots show a dashed "photo coming soon" box. Before launch, either fill them or set `showPhotoPlaceholders: false` to hide any you haven't filled.
 
 ### Business number
 While `phone` is empty, the site runs in **preview mode**: a yellow strip says the number isn't set, and text buttons open a preview of the draft instead of Messages. The site never makes up a number. Once you add a valid 10-digit number, the buttons become real `sms:` links and the Contact page shows the number with a "Copy number" button.

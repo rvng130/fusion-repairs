@@ -3,7 +3,8 @@ import { areaText, displayPhone, phoneReady } from '../lib/sms'
 import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
 import { CopyButton } from '../components/CopyButton'
-import { BookingNotes, PageHero, Steps, usePageTitle } from './shared'
+import { BookingNotes, PageHero, Steps, TeamGrid, usePageTitle } from './shared'
+import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 
 export function HowItWorks() {
   usePageTitle(`How It Works | ${site.name}`)
@@ -15,7 +16,7 @@ export function HowItWorks() {
       <section className="section tight">
         <div className="wrap">
           <Steps />
-          <div className="card privacy reveal">
+          <div className="card privacy">
             <h2>Where's the handoff?</h2>
             <p className="muted">
               We don't post addresses online. Once you book, we text you the pickup or drop-off details for your
@@ -32,54 +33,53 @@ export function HowItWorks() {
   )
 }
 
-function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .map((p) => p[0])
-    .join('')
-    .slice(0, 2)
-}
-
 export function About() {
   usePageTitle(`About | ${site.name}`)
+  const bench = shownPhotos(site.photos.bench)
   return (
     <>
       <PageHero title="About us">
         <p className="lede">
-          We're {site.name}, a local two-person tech repair business in {areaText}. You text us, you deal with us
-          directly, and we keep you posted until your device is back in your hands.
+          {site.bio.headline} {site.bio.intro}
+        </p>
+        <p className="muted about-more">
+          We're {site.name}, a local two-person business serving {areaText}. When you text us, you're talking to the
+          people who will actually work on your device.
         </p>
       </PageHero>
       <section className="section tight">
         <div className="wrap">
-          <ul className="team">
-            {site.team.map((m) => (
-              <li key={m.name} className="card member reveal">
-                {m.photo ? (
-                  <img src={m.photo} alt={m.name} className="avatar" width={96} height={96} />
-                ) : (
-                  <span className="avatar" aria-hidden>
-                    {initials(m.name)}
-                  </span>
-                )}
-                <div>
-                  <h2>{m.name}</h2>
-                  <p className="muted">{m.role}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <div className="cta-row center spaced">
+          <TeamGrid />
+        </div>
+      </section>
+      <section className="tagline" aria-label="What we stand for">
+        <div className="wrap tagline-row">
+          {site.bio.tagline.map((t) => (
+            <p key={t}>{t}</p>
+          ))}
+        </div>
+      </section>
+      {bench.length > 0 && (
+        <section className="section">
+          <div className="wrap">
+            <div className="gallery four">
+              {bench.map((p, i) => (
+                <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+      <section className="section final-cta">
+        <div className="wrap">
+          <h2>{site.bio.closing}</h2>
+          <div className="cta-row center">
             <TextButton message={site.messages.default} className="btn-lg" />
             <Link to="/services" className="text-link">
               See Services &amp; Pricing
             </Link>
           </div>
-          {site.spanish && (
-            <p className="center muted" lang="es">
-              Se habla español.
-            </p>
-          )}
+          <BookingNotes center />
         </div>
       </section>
     </>
@@ -95,7 +95,7 @@ export function Contact() {
       </PageHero>
       <section className="section tight">
         <div className="wrap contact-grid">
-          <div className="card contact-main reveal">
+          <div className="card contact-main">
             <p className="label">Business number (text)</p>
             {phoneReady ? (
               <p className="phone">{displayPhone()}</p>
@@ -120,7 +120,7 @@ export function Contact() {
 
           <div className="stack">
             {site.spanish && (
-              <div className="card reveal" lang="es">
+              <div className="card" lang="es">
                 <p className="eyebrow">Se habla español</p>
                 <h2>¿Prefieres español?</h2>
                 <p className="muted">Escríbenos en español. Abriremos un mensaje listo para enviar.</p>
@@ -133,7 +133,7 @@ export function Contact() {
                 </div>
               </div>
             )}
-            <div className="card reveal">
+            <div className="card">
               <p className="eyebrow">Selling a device?</p>
               <h2>Electronics buyback</h2>
               <p className="muted">Text the model, condition, and a few photos. We'll make an offer if we're interested.</p>
@@ -142,7 +142,7 @@ export function Contact() {
                 Text about a device
               </TextButton>
             </div>
-            <div className="card reveal">
+            <div className="card">
               <p className="label">Service area</p>
               <p>
                 {areaText}, {site.state}. Local pickup and drop-off by appointment. We text you the handoff details

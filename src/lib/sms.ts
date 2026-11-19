@@ -63,4 +63,4 @@ export function activePromo(): Promo | null {
   return p
 }
 
-export const areaText = site.serviceArea.join(' & ')
+export const areaText = site.serviceAreaText

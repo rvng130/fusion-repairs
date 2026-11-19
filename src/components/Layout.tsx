@@ -3,7 +3,7 @@ import { site } from '../site.config'
 import { activePromo, areaText, phoneReady } from '../lib/sms'
 import { Link, useRouter } from '../lib/router'
 import { TextButton } from './TextButton'
-import { IconClose, IconMenu, Mark } from './icons'
+import { IconClose, IconMenu } from './icons'
 
 export const NAV = [
   { to: '/', label: 'Home' },
@@ -87,7 +87,6 @@ function Header() {
     <header className="header">
       <div className="wrap header-inner">
         <Link to="/" className="logo" aria-label={`${site.name} home`}>
-          <Mark />
           <span>{site.name}</span>
         </Link>
         <nav className="nav-desktop" aria-label="Main">
@@ -150,11 +149,12 @@ function Footer() {
       <div className="wrap footer-grid">
         <div>
           <Link to="/" className="logo">
-            <Mark />
             <span>{site.name}</span>
           </Link>
           <p className="muted">
-            Tech repair in {areaText}, {site.state}.
+            {site.bio.headline}
+            <br />
+            Serving {areaText}, {site.state}.
             <br />
             Local pickup and drop-off by appointment.
             {site.spanish && (
@@ -182,7 +182,7 @@ function Footer() {
         <span>
           © {new Date().getFullYear()} {site.name}
         </span>
-        {site.hero.image.credit && <span>{site.hero.image.credit}</span>}
+        <span>{site.bio.tagline.join(' ')}</span>
       </div>
     </footer>
   )

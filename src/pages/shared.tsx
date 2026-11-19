@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { site } from '../site.config'
 import { areaText } from '../lib/sms'
+import { PhotoSlot } from '../components/PhotoSlot'
 
 export function usePageTitle(title: string) {
   useEffect(() => {
@@ -38,7 +39,7 @@ export const STEPS = [
 
 export function Steps({ compact = false }: { compact?: boolean }) {
   return (
-    <ol className={`steps reveal ${compact ? 'compact' : ''}`}>
+    <ol className={`steps ${compact ? 'compact' : ''}`}>
       {STEPS.map((s, i) => (
         <li key={s.title}>
           <span className="step-num" aria-hidden>
@@ -56,10 +57,29 @@ export function PageHero({ eyebrow, title, children }: { eyebrow?: string; title
   return (
     <section className="page-hero">
       <div className="wrap">
-        <p className="eyebrow">{eyebrow ?? `${areaText}, ${site.state}`}</p>
+        <p className="eyebrow">{eyebrow ?? `Serving ${areaText}`}</p>
         <h1>{title}</h1>
         {children}
       </div>
     </section>
+  )
+}
+
+export function TeamGrid() {
+  return (
+    <ul className="team">
+      {site.team.map((m) => (
+        <li key={m.name} className="member">
+          <PhotoSlot
+            photo={{ src: m.photo, alt: `${m.name}, ${m.role}` }}
+            placeholder={`Photo of ${m.name.split(' ')[0]}`}
+            ratio="4 / 5"
+            showCaption={false}
+          />
+          <h3>{m.name}</h3>
+          <p className="muted">{m.role}</p>
+        </li>
+      ))}
+    </ul>
   )
 }

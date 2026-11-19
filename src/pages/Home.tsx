@@ -2,24 +2,23 @@ import { site } from '../site.config'
 import { areaText, featuredService, formatPrice, serviceMessage, visibleServices } from '../lib/sms'
 import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
+import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 import { IconArrow } from '../components/icons'
-import { BookingNotes, Steps, usePageTitle } from './shared'
+import { BookingNotes, Steps, TeamGrid, usePageTitle } from './shared'
 
 export function Home() {
-  usePageTitle(`${site.name} | PC repair & tech support in ${areaText}, ${site.state}`)
+  usePageTitle(`${site.name} | PC repair & tech support in Norwalk & Stamford, ${site.state}`)
   const offer = featuredService
+  const builds = shownPhotos(site.photos.builds)
+  const bench = shownPhotos(site.photos.bench)
   return (
     <>
       <section className="hero">
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">
-              {areaText}, {site.state}
-            </p>
-            <h1>PC repair and tech support in Norwalk &amp; Stamford.</h1>
-            <p className="lede">
-              We troubleshoot PCs, build custom computers, help with phone transfers, and clean PS5 and Xbox consoles.
-            </p>
+            <p className="eyebrow">Serving {areaText}</p>
+            <h1>{site.bio.headline}</h1>
+            <p className="lede">{site.bio.intro}</p>
             <div className="cta-row">
               <TextButton message={site.messages.default} className="btn-lg" />
               <Link to="/services" className="text-link">
@@ -28,55 +27,28 @@ export function Home() {
             </div>
             <BookingNotes />
           </div>
-          <figure className="hero-media reveal">
-            <img
-              src={site.hero.image.src}
-              alt={site.hero.image.alt}
-              width={1600}
-              height={1067}
-              fetchPriority="high"
-              onError={(e) => e.currentTarget.parentElement?.classList.add('img-failed')}
-            />
-          </figure>
+          <PhotoSlot photo={site.photos.hero} placeholder="Hero photo: a PC open on your bench" ratio="4 / 5" priority />
         </div>
       </section>
 
-      {offer && (
-        <section className="section" aria-labelledby="offer-title">
-          <div className="wrap">
-            <div className="offer reveal">
-              <div className="offer-price" aria-hidden>
-                {formatPrice(offer)}
-              </div>
-              <div className="offer-body">
-                <p className="eyebrow">Flat price</p>
-                <h2 id="offer-title">
-                  {offer.name} — <span className="price">{formatPrice(offer)}</span>
-                </h2>
-                <p className="muted">{offer.description}</p>
-                <div className="cta-row">
-                  <TextButton message={serviceMessage(offer)} ariaLabel={`Text us to book ${offer.name}`}>
-                    Book a cleaning
-                  </TextButton>
-                  <Link to={`/services#${offer.id}`} className="text-link">
-                    All services &amp; pricing <IconArrow size={18} />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+      <section className="tagline" aria-label="What we stand for">
+        <div className="wrap tagline-row">
+          {site.bio.tagline.map((t) => (
+            <p key={t}>{t}</p>
+          ))}
+        </div>
+      </section>
 
       <section className="section" aria-labelledby="svc-title">
-        <div className="wrap">
-          <div className="section-head">
-            <h2 id="svc-title">What we do</h2>
+        <div className="wrap split">
+          <div className="split-head">
+            <h2 id="svc-title">Our services</h2>
+            <p className="muted">Text us the model and the problem. We'll quote it before any work starts.</p>
             <Link to="/services" className="text-link">
               Services &amp; Pricing <IconArrow size={18} />
             </Link>
           </div>
-          <ul className="price-list reveal">
+          <ul className="price-list">
             {visibleServices.map((s) => (
               <li key={s.id}>
                 <Link to={`/services#${s.id}`}>
@@ -89,6 +61,47 @@ export function Home() {
         </div>
       </section>
 
+      {offer && (
+        <section className="section flush" aria-labelledby="offer-title">
+          <div className="wrap">
+            <div className="offer">
+              <p className="offer-price" aria-hidden>
+                {formatPrice(offer)}
+              </p>
+              <div>
+                <h2 id="offer-title">
+                  {offer.name}, <span className="nowrap">{formatPrice(offer)} flat</span>
+                </h2>
+                <p className="muted">{offer.description}</p>
+                <div className="cta-row">
+                  <TextButton message={serviceMessage(offer)} ariaLabel={`Text us to book ${offer.name}`}>
+                    Book a cleaning
+                  </TextButton>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {builds.length > 0 && (
+        <section className="section" aria-labelledby="builds-title">
+          <div className="wrap">
+            <div className="section-head">
+              <h2 id="builds-title">PCs we've built</h2>
+              <TextButton message={visibleServices.find((s) => s.id === 'custom-pc')?.message ?? site.messages.default} variant="secondary">
+                Ask about a build
+              </TextButton>
+            </div>
+            <div className="gallery">
+              {builds.map((p, i) => (
+                <PhotoSlot key={i} photo={p} placeholder={`Build photo ${i + 1}`} ratio="1 / 1" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="section" aria-labelledby="how-title">
         <div className="wrap">
           <div className="section-head">
@@ -97,15 +110,41 @@ export function Home() {
               The details <IconArrow size={18} />
             </Link>
           </div>
-          <Steps compact />
+          <Steps />
         </div>
       </section>
 
+      <section className="section" aria-labelledby="team-title">
+        <div className="wrap">
+          <div className="section-head">
+            <h2 id="team-title">Who you'll be texting</h2>
+            <Link to="/about" className="text-link">
+              About us <IconArrow size={18} />
+            </Link>
+          </div>
+          <TeamGrid />
+        </div>
+      </section>
+
+      {bench.length > 0 && (
+        <section className="section" aria-labelledby="bench-title">
+          <div className="wrap">
+            <div className="section-head">
+              <h2 id="bench-title">On the bench</h2>
+            </div>
+            <div className="gallery four">
+              {bench.map((p, i) => (
+                <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="section" aria-labelledby="sell-title">
         <div className="wrap">
-          <div className="sell reveal">
+          <div className="sell">
             <div>
-              <p className="eyebrow">Also</p>
               <h2 id="sell-title">Sell your electronics</h2>
               <p className="muted">
                 Have a console, PC, phone, or other device you don't use anymore? Text us the model, its condition, and
@@ -121,8 +160,7 @@ export function Home() {
 
       <section className="section final-cta">
         <div className="wrap">
-          <h2>Tell us what's going on.</h2>
-          <p className="muted">Send the device model and a quick description. We'll reply with pricing or next steps.</p>
+          <h2>{site.bio.closing}</h2>
           <div className="cta-row center">
             <TextButton message={site.messages.default} className="btn-lg" />
           </div>

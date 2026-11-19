@@ -8,7 +8,8 @@ export function Services() {
   return (
     <>
       <PageHero title="Services & Pricing">
-        <p className="lede">
+        <p className="lede">{site.bio.intro}</p>
+        <p className="muted about-more">
           Flat prices where we can. For everything else, text us the model and the problem and we'll quote it before any
           work starts.
         </p>
@@ -17,17 +18,20 @@ export function Services() {
 
       <section className="section tight">
         <div className="wrap">
-          <ul className="service-grid">
-            {visibleServices.map((s) => (
-              <li key={s.id} id={s.id} className="card service reveal">
-                <div className="service-top">
+          <ul className="service-list">
+            {visibleServices.map((s, i) => (
+              <li key={s.id} id={s.id} className="service">
+                <span className="service-num" aria-hidden>
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <div className="service-body">
                   <h2>{s.name}</h2>
-                  <p className={s.price === null ? 'quote' : 'price big'}>
-                    {formatPrice(s)}
-                    {s.priceNote && <small> · {s.priceNote}</small>}
-                  </p>
+                  <p className="muted">{s.description}</p>
                 </div>
-                <p className="muted">{s.description}</p>
+                <p className={s.price === null ? 'quote' : 'price big'}>
+                  {formatPrice(s)}
+                  {s.priceNote && <small> · {s.priceNote}</small>}
+                </p>
                 <TextButton
                   message={serviceMessage(s)}
                   variant={s.price === null ? 'secondary' : 'primary'}
@@ -43,8 +47,8 @@ export function Services() {
 
       <section className="section" aria-labelledby="pay-title">
         <div className="wrap">
-          <div className="card pay reveal">
-            <h2 id="pay-title">Payment</h2>
+          <div className="pay">
+            <h2 id="pay-title">We accept</h2>
             <ul className="chips" aria-label="Accepted payment methods">
               {site.payments.map((p) => (
                 <li key={p}>{p}</li>
