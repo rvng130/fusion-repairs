@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { site } from '../site.config'
-import { activePromo, areaText, phoneReady } from '../lib/sms'
+import { activePromo, areaText, emailReady } from '../lib/sms'
 import { Link, useRouter } from '../lib/router'
 import { TextButton } from './TextButton'
 import { IconClose, IconMenu, Mark } from './icons'
@@ -14,11 +14,11 @@ export const NAV = [
 ]
 
 function SetupStrip() {
-  if (phoneReady) return null
+  if (emailReady) return null
   return (
     <div className="setup-strip" role="note">
-      <strong>Preview mode:</strong> the business number isn't set, so text buttons show a preview instead of opening
-      Messages. Add it in <code>src/site.config.ts</code>.
+      <strong>Preview mode:</strong> the booking email isn't set, so booking buttons show a preview. Add it in{' '}
+      <code>src/site.config.ts</code>.
     </div>
   )
 }
@@ -34,8 +34,8 @@ function PromoBanner() {
           <strong>{promo.title}</strong> <span>{promo.details}</span>
           {fine && <small className="promo-fine">{fine}</small>}
         </div>
-        <TextButton message={promo.message} variant="ghost" ariaLabel={`Text us about: ${promo.title}`}>
-          Claim by text
+        <TextButton message={promo.message} subject={`Offer: ${promo.title}`} variant="ghost" ariaLabel={`Email us about: ${promo.title}`}>
+          Claim by email
         </TextButton>
       </div>
     </aside>
@@ -122,8 +122,8 @@ function Header() {
         </nav>
         <TextButton message={site.messages.default} className="btn-block" />
         {site.spanish && (
-          <TextButton message={site.messages.spanish} variant="secondary" lang="es" className="btn-block">
-            Enviar mensaje · Se habla español
+          <TextButton message={site.messages.spanish} subject={site.subjects.spanish} variant="secondary" lang="es" className="btn-block">
+            Enviar correo · Se habla español
           </TextButton>
         )}
       </div>
@@ -136,7 +136,7 @@ function MobileBar() {
     <div className="mobile-bar">
       <TextButton message={site.messages.default} className="btn-block" />
       {site.spanish && (
-        <TextButton message={site.messages.spanish} variant="secondary" lang="es" ariaLabel="Enviar mensaje en español">
+        <TextButton message={site.messages.spanish} subject={site.subjects.spanish} variant="secondary" lang="es" ariaLabel="Enviar correo en español">
           ES
         </TextButton>
       )}

@@ -1,10 +1,10 @@
 import { site } from '../site.config'
-import { areaText, featuredService, formatPrice, serviceMessage, visibleServices } from '../lib/sms'
+import { areaText, featuredService, formatPrice, serviceMessage, serviceSubject, visibleServices } from '../lib/sms'
 import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
 import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 import { IconArrow } from '../components/icons'
-import { BookingNotes, Steps, TeamGrid, usePageTitle } from './shared'
+import { BookingNotes, Steps, TeamGrid, LoopVideo, usePageTitle } from './shared'
 
 export function Home() {
   usePageTitle(`${site.name} | PC repair & tech support in Norwalk & Stamford, ${site.state}`)
@@ -43,7 +43,7 @@ export function Home() {
         <div className="wrap split">
           <div className="split-head">
             <h2 id="svc-title">Our services</h2>
-            <p className="muted">Text us the model and the problem. We'll quote it before any work starts.</p>
+            <p className="muted">Email us the model and the problem. We'll quote it before any work starts.</p>
             <Link to="/services" className="text-link">
               Services &amp; Pricing <IconArrow size={18} />
             </Link>
@@ -74,7 +74,7 @@ export function Home() {
                 </h2>
                 <p className="muted">{offer.description}</p>
                 <div className="cta-row">
-                  <TextButton message={serviceMessage(offer)} ariaLabel={`Text us to book ${offer.name}`}>
+                  <TextButton message={serviceMessage(offer)} subject={serviceSubject(offer)} ariaLabel={`Email us to book ${offer.name}`}>
                     Book a cleaning
                   </TextButton>
                 </div>
@@ -89,7 +89,11 @@ export function Home() {
           <div className="wrap">
             <div className="section-head">
               <h2 id="builds-title">PCs we've built</h2>
-              <TextButton message={visibleServices.find((s) => s.id === 'custom-pc')?.message ?? site.messages.default} variant="secondary">
+              <TextButton
+                message={visibleServices.find((s) => s.id === 'custom-pc')?.message ?? site.messages.default}
+                subject="Custom PC build"
+                variant="secondary"
+              >
                 Ask about a build
               </TextButton>
             </div>
@@ -117,7 +121,7 @@ export function Home() {
       <section className="section" aria-labelledby="team-title">
         <div className="wrap">
           <div className="section-head">
-            <h2 id="team-title">Who you'll be texting</h2>
+            <h2 id="team-title">Who you'll be working with</h2>
             <Link to="/about" className="text-link">
               About us <IconArrow size={18} />
             </Link>
@@ -133,6 +137,7 @@ export function Home() {
               <h2 id="bench-title">On the bench</h2>
             </div>
             <div className="gallery four">
+              <LoopVideo />
               {bench.map((p, i) => (
                 <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
               ))}
@@ -147,12 +152,12 @@ export function Home() {
             <div>
               <h2 id="sell-title">Sell your electronics</h2>
               <p className="muted">
-                Have a console, PC, phone, or other device you don't use anymore? Text us the model, its condition, and
+                Have a console, PC, phone, or other device you don't use anymore? Email us the model, its condition, and
                 a few photos. We'll take a look and make an offer if we're interested.
               </p>
             </div>
-            <TextButton message={site.messages.buyback} variant="secondary" ariaLabel="Text us about selling a device">
-              Text us about a device
+            <TextButton message={site.messages.buyback} subject={site.subjects.buyback} variant="secondary" ariaLabel="Email us about selling a device">
+              Email us about a device
             </TextButton>
           </div>
         </div>

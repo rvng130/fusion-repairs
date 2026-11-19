@@ -1,16 +1,16 @@
 /* ============ Fusion Repair — styles (cream / light) ============ */
 :root {
-  --bg: #f1f3ee;
-  --paper: #fafbf8;
-  --sand: #e4e8e0;
-  --line: #d6dbd2;
-  --line-strong: #b9c1b5;
-  --text: #232a27;
-  --muted: #59625d;
+  --bg: #f4eee3;
+  --paper: #faf6ee;
+  --sand: #ebe3d4;
+  --line: #ddd3c3;
+  --line-strong: #c4b7a2;
+  --text: #2f2a24;
+  --muted: #675e53;
   --accent: #3d6b55;
   --accent-soft: #d5e3d9;
   --wrap: 1160px;
-  --serif: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
   --sans: 'Public Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light;
 }
@@ -48,9 +48,9 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--serif);
-  font-weight: 650;
+  font-weight: 450;
   line-height: 1.08;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.012em;
 }
 h1 {
   font-size: clamp(2.6rem, 5.6vw, 4.6rem);
@@ -121,10 +121,8 @@ h1:focus,
 }
 .eyebrow {
   font-family: var(--serif);
-    font-size: 0.82rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+    font-style: italic;
+  font-size: 1.15rem;
   color: var(--accent);
   margin-bottom: 16px;
 }
@@ -280,9 +278,9 @@ h1:focus,
 }
 .logo {
   font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
   text-decoration: none;
   min-height: 44px;
   display: inline-flex;
@@ -357,6 +355,12 @@ h1:focus,
   overflow: hidden;
   background: var(--sand);
 }
+.photo-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .photo-frame img {
   width: 100%;
   height: 100%;
@@ -430,6 +434,7 @@ h1:focus,
 }
 .tagline-row p {
   font-family: var(--serif);
+  font-style: italic;
     font-size: clamp(1.15rem, 2vw, 1.5rem);
   padding: 26px 0;
   text-align: center;
@@ -571,6 +576,7 @@ h1:focus,
 }
 .step-num {
   font-family: var(--serif);
+  font-style: italic;
     color: var(--accent);
   font-size: 1.1rem;
 }
@@ -648,6 +654,7 @@ h1:focus,
 }
 .service-num {
   font-family: var(--serif);
+  font-style: italic;
     color: var(--accent);
   font-size: 1.1rem;
 }
@@ -712,6 +719,24 @@ h1:focus,
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   line-height: 1.1;
 }
+.email-address {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.email-address a,
+.phone-small a {
+  text-decoration: none;
+}
+.email-address a:hover,
+.phone-small a:hover {
+  color: var(--accent);
+}
+.phone-small {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+}
 .setup-box {
   border: 1px solid #dcc77f;
   background: #f8edc6;
@@ -759,7 +784,7 @@ h1:focus,
   width: min(92vw, 520px);
 }
 .dialog::backdrop {
-  background: rgba(35, 42, 39, 0.45);
+  background: rgba(47, 42, 36, 0.45);
 }
 .dialog-inner {
   padding: 28px;

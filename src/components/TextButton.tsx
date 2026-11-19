@@ -1,12 +1,15 @@
 import { createContext, useContext, useRef, useState, type ReactNode } from 'react'
-import { smsHref } from '../lib/sms'
-import { IconText } from './icons'
+import { site } from '../site.config'
+import { mailtoHref } from '../lib/sms'
+import { IconMail } from './icons'
 import { CopyButton } from './CopyButton'
 
 type Variant = 'primary' | 'secondary' | 'ghost'
 
 type Props = {
   message: string
+  /** Email subject line */
+  subject?: string
   children?: ReactNode
   variant?: Variant
   lang?: string
@@ -16,34 +19,51 @@ type Props = {
 }
 
 /**
- * The site's main call to action. Opens the Messages app with a prefilled draft.
- * If no business number is set, it opens a preview dialog instead (never a fake number).
+ * The site's main call to action. Opens the visitor's email app with a
+ * subject line and prefilled draft addressed to site.email.
+ * If no email is configured, it opens a preview dialog instead.
  */
-export function TextButton({ message, children = 'Text Us to Book', variant = 'primary', lang, className = '', ariaLabel }: Props) {
-  const href = smsHref(message)
+export function TextButton({
+  message,
+  subject = site.subjects.default,
+  children = 'Email Us to Book',
+  variant = 'primary',
+  lang,
+  className = '',
+  ariaLabel,
+}: Props) {
+  const href = mailtoHref(subject, message)
   const preview = usePreview()
   const cls = `btn btn-${variant} ${className}`
   const content = (
     <>
-      <IconText size={18} />
+      <IconMail size={18} />
       <span>{children}</span>
     </>
   )
   if (href) {
     return (
-      <a className={cls} href={href} lang={lang} aria-label={ariaLabel} data-sms-body={message}>
+      <a className={cls} href={href} lang={lang} aria-label={ariaLabel} data-mail-subject={subject} data-mail-body={message}>
         {content}
       </a>
     )
   }
   return (
-    <button type="button" className={cls} lang={lang} aria-label={ariaLabel} data-sms-body={message} onClick={() => preview(message)}>
+    <button
+      type="button"
+      className={cls}
+      lang={lang}
+      aria-label={ariaLabel}
+      data-mail-subject={subject}
+      data-mail-body={message}
+      onClick={() => preview(message)}
+    >
       {content}
     </button>
   )
 }
 
-/* ---------- Preview dialog (shown only while no number is configured) ---------- */
+/* ---------- Preview dialog (shown only while no email is configured) ---------- */
 
 const PreviewCtx = createContext<(msg: string) => void>(() => {})
 const usePreview = () => useContext(PreviewCtx)
@@ -68,9 +88,9 @@ export function PreviewProvider({ children }: { children: ReactNode }) {
       >
         <div className="dialog-inner">
           <p className="eyebrow">Preview only</p>
-          <h2 id="preview-title">The business number isn't set up yet</h2>
+          <h2 id="preview-title">The booking email isn't set up yet</h2>
           <p className="muted">
-            Once it's added in <code>src/site.config.ts</code>, this button opens the Messages app with this draft:
+            Once it's added in <code>src/site.config.ts</code>, this button opens an email with this draft:
           </p>
           <blockquote className="draft">{msg}</blockquote>
           <div className="row">

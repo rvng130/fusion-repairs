@@ -1,5 +1,5 @@
 import { site } from '../site.config'
-import { formatPrice, serviceMessage, visibleServices } from '../lib/sms'
+import { formatPrice, serviceMessage, serviceSubject, visibleServices } from '../lib/sms'
 import { TextButton } from '../components/TextButton'
 import { BookingNotes, PageHero, usePageTitle } from './shared'
 
@@ -10,7 +10,7 @@ export function Services() {
       <PageHero title="Services & Pricing">
         <p className="lede">{site.bio.intro}</p>
         <p className="muted about-more">
-          Flat prices where we can. For everything else, text us the model and the problem and we'll quote it before any
+          Flat prices where we can. For everything else, email us the model and the problem and we'll quote it before any
           work starts.
         </p>
         <BookingNotes />
@@ -34,10 +34,11 @@ export function Services() {
                 </p>
                 <TextButton
                   message={serviceMessage(s)}
+                  subject={serviceSubject(s)}
                   variant={s.price === null ? 'secondary' : 'primary'}
-                  ariaLabel={`Text us about ${s.name}`}
+                  ariaLabel={`Email us about ${s.name}`}
                 >
-                  {s.price === null ? 'Text for a quote' : 'Text to book'}
+                  {s.price === null ? 'Email for a quote' : 'Email to book'}
                 </TextButton>
               </li>
             ))}

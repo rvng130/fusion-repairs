@@ -21,7 +21,7 @@ export type Service = {
   /** Optional small note shown next to the price, e.g. "local house call" */
   priceNote?: string
   /**
-   * Prefilled text message for this service's button.
+   * Prefilled email message for this service's button.
    * Use {price} to insert the price automatically.
    */
   message: string
@@ -50,7 +50,7 @@ export type Promo = {
   idVerification: string
   /** e.g. "Ends Dec 31". Leave "" if no end date. */
   ends: string
-  /** Prefilled text when someone taps the banner */
+  /** Prefilled email when someone taps the banner */
   message: string
 }
 
@@ -58,9 +58,13 @@ export const site = {
   name: 'Fusion Repair',
 
   /**
-   * BUSINESS NUMBER — the only place the number lives.
-   * Enter it like "203-555-0123" (10 digits, US). Leave "" until it's ready:
-   * the site then shows a "preview only" notice instead of working text links.
+   * BOOKING EMAIL — every "Email Us to Book" button opens a draft to this address.
+   */
+  email: 'fusionrepairshelp@gmail.com',
+
+  /**
+   * Optional business phone, e.g. "203-555-0123". If set, it's shown on the
+   * Contact page as another way to reach you. Leave '' to hide it.
    */
   phone: '',
 
@@ -88,32 +92,41 @@ export const site = {
    */
   showPhotoPlaceholders: true,
   photos: {
-    hero: { src: '', alt: 'A PC open on our repair bench', caption: '' } as Photo,
+    hero: { src: '/photos/hero-open-pc.jpg', alt: 'A PC open on our workbench with the side panel off', caption: '' } as Photo,
     builds: [
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
-      { src: '', alt: '', caption: 'Build name, CPU / GPU' },
+      { src: '/photos/build-white.jpg', alt: 'White PC build with purple RGB lighting and a liquid cooler', caption: '' },
+      { src: '/photos/build-open-air.jpg', alt: 'Open-air PC build with an RGB CPU cooler', caption: '' },
+      { src: '/photos/build-black.jpg', alt: 'Black PC build with a tempered glass side panel', caption: '' },
     ] as Photo[],
     /** Parts boxes, the bench, tools, consoles — "tech stuff" */
     bench: [
-      { src: '', alt: '', caption: 'Parts boxes' },
-      { src: '', alt: '', caption: 'The bench' },
-      { src: '', alt: '', caption: 'Tools' },
-      { src: '', alt: '', caption: 'Console cleaning' },
+      { src: '/photos/bench-parts.jpg', alt: 'PC parts boxes lined up on a desk before a build', caption: '' },
+      { src: '/photos/bench-gpu.jpg', alt: 'Installing a graphics card into a PC case', caption: '' },
+      { src: '/photos/bench-teardown.jpg', alt: 'A device taken apart for repair', caption: '' },
     ] as Photo[],
+    /** Short looping clip (muted, no sound). Set src: '' to hide it. */
+    video: {
+      src: '/photos/opening-pc.mp4',
+      poster: '/photos/opening-pc-poster.jpg',
+      label: 'Video: opening up a PC on the bench',
+    },
   },
 
-  /** Prefilled text drafts. Brackets are for the customer to fill in. */
+  /** Email subject lines for the main buttons */
+  subjects: {
+    default: 'Repair request',
+    spanish: 'Solicitud de reparación',
+    buyback: 'Selling a device',
+  },
+
+  /** Prefilled email drafts. Brackets are for the customer to fill in. */
   messages: {
     default:
       "Hi Fusion Repair, I'd like help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
     spanish:
       'Hola Fusion Repair, me gustaría ayuda con mi [dispositivo/modelo]. El problema es [descripción breve]. Estoy cerca de [Norwalk/Stamford].',
     buyback:
-      "Hi Fusion Repair, I have a [device/model] I'd like to sell. Condition: [condition]. I'll send a few photos.",
+      "Hi Fusion Repair, I have a [device/model] I'd like to sell. Condition: [condition]. I've attached a few photos.",
   },
 
   payments: ['Cash', 'Venmo', 'Zelle'],
@@ -206,7 +219,7 @@ export const site = {
     {
       id: 'tech-support',
       name: 'General tech support',
-      description: "Not sure what category it falls under? Text us anyway.",
+      description: "Not sure what category it falls under? Email us anyway.",
       price: null,
       message:
         "Hi Fusion Repair, I have a tech question about my [device]. [Short description]. I'm near [Norwalk/Stamford].",
@@ -227,7 +240,7 @@ export const site = {
     {
       id: 'ps5-hdmi',
       name: 'PS5 HDMI port repair',
-      description: "No picture? A damaged HDMI port is a common cause. Text us and we'll take a look.",
+      description: "No picture? A damaged HDMI port is a common cause. Email us and we'll take a look.",
       price: null,
       message:
         "Hi Fusion Repair, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm near [Norwalk/Stamford].",
@@ -257,7 +270,7 @@ export const site = {
       {
         id: 'first-service',
         title: '10% off your first service',
-        details: 'Mention this offer when you text us to book.',
+        details: 'Mention this offer when you email us to book.',
         eligibility: '[EDIT: e.g. New customers only. One per customer. Not combinable with other offers.]',
         idVerification: '[EDIT: e.g. "No ID needed" or "Valid ID required at pickup" — or leave empty]',
         ends: '',
@@ -267,7 +280,7 @@ export const site = {
       {
         id: 'holiday',
         title: 'Holiday deal: [EDIT: amount] off custom PCs & console cleaning',
-        details: 'Text us before [EDIT: end date] to lock it in.',
+        details: 'Email us before [EDIT: end date] to lock it in.',
         eligibility: '[EDIT: who qualifies]',
         idVerification: '',
         ends: '[EDIT: e.g. Ends Dec 31]',
@@ -278,9 +291,10 @@ export const site = {
   },
 
   team: [
+    // role: optional title shown under the name (leave '' for none)
     // Photo: put the file in /public/photos (e.g. public/photos/andrew.jpg) and set photo: '/photos/andrew.jpg'
-    { name: 'Andrew Ishikawa', role: 'CEO', photo: '' },
-    { name: 'Daniel Sarria', role: 'Head Technician', photo: '' },
+    { name: 'Andrew Ishikawa', role: '', photo: '' },
+    { name: 'Daniel Sarria', role: '', photo: '' },
   ],
 }
 

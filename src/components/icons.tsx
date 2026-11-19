@@ -48,7 +48,14 @@ export const IconClose = ({ size }: P) => (
 export const Mark = ({ size = 30 }: P) => (
   <svg width={Math.round((size * 54) / 38)} height={size} viewBox="5 13 54 38" aria-hidden focusable={false} className="mark">
     <circle cx="24" cy="32" r="17" fill="#8fb39d" />
-    <circle cx="40" cy="32" r="17" fill="#ffffff" fillOpacity="0.82" stroke="#232a27" strokeWidth="2.5" />
-    <circle cx="24" cy="32" r="17" fill="none" stroke="#232a27" strokeWidth="2.5" />
+    <circle cx="40" cy="32" r="17" fill="#fffdf8" fillOpacity="0.82" stroke="#2f2a24" strokeWidth="2.5" />
+    <circle cx="24" cy="32" r="17" fill="none" stroke="#2f2a24" strokeWidth="2.5" />
+  </svg>
+)
+
+export const IconMail = ({ size }: P) => (
+  <svg {...base(size)}>
+    <rect x="3" y="5" width="18" height="14" rx="1" />
+    <path d="m3.5 6 8.5 7 8.5-7" />
   </svg>
 )

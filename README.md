@@ -1,6 +1,6 @@
 # Fusion Repair website
 
-React + Vite + TypeScript. Five pages (Home, Services & Pricing, How It Works, About, Contact Us). Every booking button opens the visitor's Messages app with a prefilled text.
+React + Vite + TypeScript. Five pages (Home, Services & Pricing, How It Works, About, Contact Us). Every booking button opens the visitor's email app with a subject line and a prefilled message to the booking email.
 
 ## Preview it
 
@@ -17,10 +17,12 @@ To test on your phone, run `npm run dev -- --host` and open the "Network" URL it
 
 | What | Setting |
 |---|---|
-| Business number | `phone: ''`: enter it like `'203-555-0123'` |
+| Booking email | `email: 'fusionrepairshelp@gmail.com'` |
+| Phone (optional, shown on Contact) | `phone: ''`: enter it like `'203-555-0123'` |
+| Looping video | `photos.video` (muted MP4 in `public/photos/`; set `src: ''` to hide) |
 | Services, descriptions, prices | `services: [...]`: `price: 50` shows "$50", `price: null` shows "Request a quote" |
 | Show or hide a service | `visible: true / false` (Wi-Fi/printer house call, PS5 HDMI repair, and phone repair are in there, hidden) |
-| Text drafts | `messages` (default, Spanish, buyback) plus each service's `message`. `{price}` fills in that service's price |
+| Email drafts | `messages` and `subjects` (default, Spanish, buyback) plus each service's `message`. `{price}` fills in that service's price |
 | Payment methods | `payments: ['Cash', 'Venmo', 'Zelle']` |
 | Promo banner | `promo` (see below) |
 | Bio copy (headline, intro, tagline, closing line) | `bio` |
@@ -41,8 +43,8 @@ Slots:
 
 Empty slots show a dashed "photo coming soon" box. Before launch, either fill them or set `showPhotoPlaceholders: false` to hide any you haven't filled.
 
-### Business number
-While `phone` is empty, the site runs in **preview mode**: a yellow strip says the number isn't set, and text buttons open a preview of the draft instead of Messages. The site never makes up a number. Once you add a valid 10-digit number, the buttons become real `sms:` links and the Contact page shows the number with a "Copy number" button.
+### Booking email
+All booking buttons open an email to `site.email` with a subject line (e.g. "Quote request: Custom PC builds") and a prefilled message. The Contact page also shows the address with a "Copy email" button for people whose email app doesn't open.
 
 ### Promotions
 1. Open `promo.drafts` and fill in every `[EDIT …]` field (eligibility, ID requirement, end date, amount).
@@ -63,13 +65,13 @@ Upload `dist/` to any static host. The site uses clean URLs (`/services`), so th
 - **Vercel**: import the repo; `vercel.json` handles routing.
 - **Cloudflare Pages**: build `npm run build`, output `dist`; it handles SPA routing automatically.
 
-If your host can't do rewrites (e.g. GitHub Pages), build with hash URLs instead:
-```bash
-VITE_HASH_ROUTER=1 npm run build
-```
+- **GitHub Pages (free)**: push this folder to a GitHub repo, then go to Settings → Pages → Source: **GitHub Actions**. `.github/workflows/deploy.yml` builds and publishes on every push to `main`.
+  - With a custom domain: Settings → Pages → Custom domain. At your domain registrar (e.g. GoDaddy), add four A records for `@` (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a CNAME for `www` → `<username>.github.io`.
+  - Without a custom domain (site at `<username>.github.io/<repo>/`): set `VITE_HASH_ROUTER: '1'` in the workflow file so links work from the sub-folder.
+- **GoDaddy cPanel hosting**: upload the contents of `dist/` into `public_html`. The included `.htaccess` handles routing.
 
 ## What's been checked
 - Phone (390px) and desktop (1440px) layouts, with no sideways scrolling
-- Every nav link, service anchor, and text button (service-specific, Spanish, buyback, promo), in both preview mode and with a number set
+- Every nav link, service anchor, and email button (service-specific, Spanish, buyback, promo): correct address, subject, and message
 - Mobile menu: Escape closes it, focus stays inside while it's open, and it closes on navigation
 - Skip link, visible focus rings, AA color contrast, and `prefers-reduced-motion` (no fade-in or hover motion)

@@ -13,7 +13,7 @@ export const phoneReady = phoneE164 !== null
 
 if (site.phone && !phoneReady) {
   console.error(
-    `[Fusion Repair] site.phone "${site.phone}" isn't a valid 10-digit US number. Text buttons are in preview mode.`,
+    `[Fusion Repair] site.phone "${site.phone}" isn't a valid 10-digit US number, so it's hidden.`,
   )
 }
 
@@ -30,6 +30,19 @@ export function displayPhone(): string {
 export function smsHref(body: string): string | null {
   if (!phoneE164) return null
   return `sms:${phoneE164}?&body=${encodeURIComponent(body)}`
+}
+
+/* ---------- Email (main booking method) ---------- */
+export const emailReady = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email.trim())
+
+/** mailto: link that opens the visitor's email app with a subject and draft. */
+export function mailtoHref(subject: string, body: string): string | null {
+  if (!emailReady) return null
+  return `mailto:${site.email.trim()}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+export function serviceSubject(s: Service): string {
+  return s.price === null ? `Quote request: ${s.name}` : `Booking: ${s.name}`
 }
 
 export function formatPrice(s: Pick<Service, 'price'>): string {

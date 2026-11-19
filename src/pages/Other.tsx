@@ -3,7 +3,7 @@ import { areaText, displayPhone, phoneReady } from '../lib/sms'
 import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
 import { CopyButton } from '../components/CopyButton'
-import { BookingNotes, PageHero, Steps, TeamGrid, usePageTitle } from './shared'
+import { BookingNotes, PageHero, Steps, TeamGrid, LoopVideo, usePageTitle } from './shared'
 import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 
 export function HowItWorks() {
@@ -11,7 +11,7 @@ export function HowItWorks() {
   return (
     <>
       <PageHero title="How it works">
-        <p className="lede">Everything happens by text, from the first question to the return.</p>
+        <p className="lede">Everything happens over email, from the first question to the return.</p>
       </PageHero>
       <section className="section tight">
         <div className="wrap">
@@ -19,7 +19,7 @@ export function HowItWorks() {
           <div className="card privacy">
             <h2>Where's the handoff?</h2>
             <p className="muted">
-              We don't post addresses online. Once you book, we text you the pickup or drop-off details for your
+              We don't post addresses online. Once you book, we email you the pickup or drop-off details for your
               appointment in {site.serviceArea.join(' or ')}.
             </p>
           </div>
@@ -43,7 +43,7 @@ export function About() {
           {site.bio.headline} {site.bio.intro}
         </p>
         <p className="muted about-more">
-          We're {site.name}, a local two-person business serving {areaText}. When you text us, you're talking to the
+          We're {site.name}, a local two-person business serving {areaText}. When you email us, you're talking to the
           people who will actually work on your device.
         </p>
       </PageHero>
@@ -63,6 +63,7 @@ export function About() {
         <section className="section">
           <div className="wrap">
             <div className="gallery four">
+              <LoopVideo />
               {bench.map((p, i) => (
                 <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
               ))}
@@ -90,29 +91,31 @@ export function Contact() {
   usePageTitle(`Contact Us | ${site.name}`)
   return (
     <>
-      <PageHero title="Text us">
-        <p className="lede">Texting is the fastest way to reach us and the way we book every appointment.</p>
+      <PageHero title="Email us">
+        <p className="lede">Email is the best way to reach us and the way we book every appointment.</p>
       </PageHero>
       <section className="section tight">
         <div className="wrap contact-grid">
           <div className="card contact-main">
-            <p className="label">Business number (text)</p>
-            {phoneReady ? (
-              <p className="phone">{displayPhone()}</p>
-            ) : (
-              <div className="setup-box" role="note">
-                <strong>Number not set — preview only.</strong>
-                <p>
-                  Add it in <code>src/site.config.ts</code> (<code>phone: ''</code>). Until then, text buttons show a
-                  preview of the draft.
-                </p>
-              </div>
-            )}
+            <p className="label">Booking email</p>
+            <p className="email-address">
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
             <div className="row">
               <TextButton message={site.messages.default} className="btn-lg" />
-              {phoneReady && <CopyButton text={displayPhone()} label="Copy number" />}
+              <CopyButton text={site.email} label="Copy email" />
             </div>
-            <p className="muted small">On a computer? Copy the number and the message below, then text from your phone.</p>
+            {phoneReady && (
+              <>
+                <p className="label">Phone</p>
+                <p className="phone-small">
+                  <a href={`tel:${displayPhone().replace(/\D/g, '')}`}>{displayPhone()}</a>
+                </p>
+              </>
+            )}
+            <p className="muted small">
+              Button not opening your email app? Copy the address and the message below into any email.
+            </p>
             <p className="label">Your message will start like this</p>
             <blockquote className="draft">{site.messages.default}</blockquote>
             <CopyButton text={site.messages.default} label="Copy message" />
@@ -123,11 +126,11 @@ export function Contact() {
               <div className="card" lang="es">
                 <p className="eyebrow">Se habla español</p>
                 <h2>¿Prefieres español?</h2>
-                <p className="muted">Escríbenos en español. Abriremos un mensaje listo para enviar.</p>
+                <p className="muted">Escríbenos en español. Abriremos un correo listo para enviar.</p>
                 <blockquote className="draft">{site.messages.spanish}</blockquote>
                 <div className="row">
-                  <TextButton message={site.messages.spanish} variant="secondary">
-                    Enviar mensaje
+                  <TextButton message={site.messages.spanish} subject={site.subjects.spanish} variant="secondary">
+                    Enviar correo
                   </TextButton>
                   <CopyButton text={site.messages.spanish} label="Copiar mensaje" lang="es" />
                 </div>
@@ -136,16 +139,21 @@ export function Contact() {
             <div className="card">
               <p className="eyebrow">Selling a device?</p>
               <h2>Electronics buyback</h2>
-              <p className="muted">Text the model, condition, and a few photos. We'll make an offer if we're interested.</p>
+              <p className="muted">Email the model, condition, and a few photos. We'll make an offer if we're interested.</p>
               <blockquote className="draft">{site.messages.buyback}</blockquote>
-              <TextButton message={site.messages.buyback} variant="secondary" ariaLabel="Text us about selling a device">
-                Text about a device
+              <TextButton
+                message={site.messages.buyback}
+                subject={site.subjects.buyback}
+                variant="secondary"
+                ariaLabel="Email us about selling a device"
+              >
+                Email about a device
               </TextButton>
             </div>
             <div className="card">
               <p className="label">Service area</p>
               <p>
-                {areaText}, {site.state}. Local pickup and drop-off by appointment. We text you the handoff details
+                {areaText}, {site.state}. Local pickup and drop-off by appointment. We email you the handoff details
                 after you book.
               </p>
               <p className="label">We accept</p>

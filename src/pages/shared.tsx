@@ -20,7 +20,7 @@ export function BookingNotes({ center = false }: { center?: boolean }) {
 
 export const STEPS = [
   {
-    title: 'Text us',
+    title: 'Email us',
     body: "Send the device model and describe what's going on. Photos help.",
   },
   {
@@ -71,15 +71,39 @@ export function TeamGrid() {
       {site.team.map((m) => (
         <li key={m.name} className="member">
           <PhotoSlot
-            photo={{ src: m.photo, alt: `${m.name}, ${m.role}` }}
+            photo={{ src: m.photo, alt: m.name }}
             placeholder={`Photo of ${m.name.split(' ')[0]}`}
             ratio="4 / 5"
             showCaption={false}
           />
           <h3>{m.name}</h3>
-          <p className="muted">{m.role}</p>
+          {m.role && <p className="muted">{m.role}</p>}
         </li>
       ))}
     </ul>
+  )
+}
+
+/** Muted looping clip. Paused (with controls) for people who prefer reduced motion. */
+export function LoopVideo() {
+  const v = site.photos.video
+  if (!v.src) return null
+  const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  return (
+    <figure className="photo video">
+      <div className="photo-frame" style={{ aspectRatio: '4 / 5' }}>
+        <video
+          src={v.src}
+          poster={v.poster}
+          muted
+          loop
+          playsInline
+          autoPlay={!reduce}
+          controls={reduce}
+          preload="metadata"
+          aria-label={v.label}
+        />
+      </div>
+    </figure>
   )
 }
