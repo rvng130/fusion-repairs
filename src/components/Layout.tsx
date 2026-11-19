@@ -166,7 +166,7 @@ function Footer() {
           <p className="muted">
             {site.bio.headline}
             <br />
-            Serving {areaText}, {site.state}.
+            Serving {areaText}, including Norwalk &amp; Stamford.
             <br />
             Local pickup and drop-off by appointment.
             {site.spanish && (

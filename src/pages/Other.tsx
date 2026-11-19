@@ -148,7 +148,7 @@ export function Contact() {
             <div className="card">
               <p className="label">Service area</p>
               <p>
-                {areaText}, {site.state}. Local pickup and drop-off by appointment. We email you the handoff details
+                Serving {areaText}, including Norwalk and Stamford. Local pickup and drop-off by appointment. We email you the handoff details
                 after you book.
               </p>
               <p className="label">We accept</p>

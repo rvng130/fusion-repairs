@@ -70,9 +70,10 @@ export const site = {
    */
   phone: '',
 
+  /** Towns where pickup / drop-off happens */
   serviceArea: ['Norwalk', 'Stamford'] as const,
-  /** Shown wherever the site describes where you work */
-  serviceAreaText: 'Stamford, Norwalk & surrounding areas',
+  /** Shown wherever the site describes where you work, e.g. "Serving the Fairfield County area" */
+  serviceAreaText: 'the Fairfield County area',
   state: 'CT',
 
   /** Show "Se habla español" and the Spanish text button */
@@ -136,9 +137,9 @@ export const site = {
   /** Prefilled email drafts. Brackets are for the customer to fill in. */
   messages: {
     default:
-      "Hi Fusion Repairs, I'd like help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+      "Hi Fusion Repairs, I'd like help with my [device/model]. The issue is [short description]. I'm in [town].",
     spanish:
-      'Hola Fusion Repairs, me gustaría ayuda con mi [dispositivo/modelo]. El problema es [descripción breve]. Estoy cerca de [Norwalk/Stamford].',
+      'Hola Fusion Repairs, me gustaría ayuda con mi [dispositivo/modelo]. El problema es [descripción breve]. Estoy en [ciudad].',
     buyback:
       "Hi Fusion Repairs, I have a [device/model] I'd like to sell. Condition: [condition]. I've attached a few photos.",
   },
@@ -161,7 +162,7 @@ export const site = {
       ],
       price: null,
       message:
-        "Hi Fusion Repairs, I need help with my [PC/laptop model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I need help with my [PC/laptop model]. The issue is [short description]. I'm in [town].",
       visible: true,
     },
     {
@@ -182,7 +183,7 @@ export const site = {
       includes: ['RAM, SSD & GPU upgrades', 'Part picking for your budget', 'Custom PC builds'],
       price: null,
       message:
-        "Hi Fusion Repairs, I'm interested in [an upgrade/a custom PC build]. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'm interested in [an upgrade/a custom PC build]. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm in [town].",
       visible: true,
     },
     {
@@ -192,7 +193,7 @@ export const site = {
       includes: ['Data transfer to a new phone (photos, contacts, messages)', 'Phone troubleshooting'],
       price: null,
       message:
-        "Hi Fusion Repairs, I'd like help with my [phone model]. I need [data transfer/troubleshooting]: [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like help with my [phone model]. I need [data transfer/troubleshooting]: [short description]. I'm in [town].",
       visible: true,
     },
     {
@@ -201,7 +202,7 @@ export const site = {
       description: 'Dust buildup makes consoles run hot and loud. We open it up and clean it out.',
       price: 50,
       message:
-        "Hi Fusion Repairs, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm in [town].",
       visible: true,
     },
 
@@ -213,7 +214,7 @@ export const site = {
       price: 75,
       priceNote: 'local house call',
       message:
-        "Hi Fusion Repairs, I'd like a house call for [Wi-Fi/printer] setup. I'm in [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I'd like a house call for [Wi-Fi/printer] setup. I'm in [town].",
       visible: false,
     },
     {
@@ -222,7 +223,7 @@ export const site = {
       description: "No picture? A damaged HDMI port is a common cause. Email us and we'll take a look.",
       price: null,
       message:
-        "Hi Fusion Repairs, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I think my PS5 HDMI port needs repair. Model: [disc/digital/slim]. What's happening: [short description]. I'm in [town].",
       visible: false,
     },
     {
@@ -231,7 +232,7 @@ export const site = {
       description: "Tell us the model and what's broken.",
       price: null,
       message:
-        "Hi Fusion Repairs, I need my [phone model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repairs, I need my [phone model] repaired. The issue is [short description]. I'm in [town].",
       visible: false,
     },
   ] satisfies Service[] as Service[],
@@ -254,7 +255,7 @@ export const site = {
         idVerification: '[EDIT: e.g. "No ID needed" or "Valid ID required at pickup" — or leave empty]',
         ends: '',
         message:
-          "Hi Fusion Repairs, I'd like to use the 10% off first service offer. I need help with my [device/model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
+          "Hi Fusion Repairs, I'd like to use the 10% off first service offer. I need help with my [device/model]. The issue is [short description]. I'm in [town].",
       },
       {
         id: 'holiday',
@@ -264,7 +265,7 @@ export const site = {
         idVerification: '',
         ends: '[EDIT: e.g. Ends Dec 31]',
         message:
-          "Hi Fusion Repairs, I saw the holiday deal. I'm interested in [custom PC build/console cleaning]. I'm near [Norwalk/Stamford].",
+          "Hi Fusion Repairs, I saw the holiday deal. I'm interested in [custom PC build/console cleaning]. I'm in [town].",
       },
     ] satisfies Promo[] as Promo[],
   },

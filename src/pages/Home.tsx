@@ -8,7 +8,7 @@ import { YouTubeSection } from '../components/YouTube'
 import { BookingNotes, Steps, TeamGrid, BenchGallery, usePageTitle } from './shared'
 
 export function Home() {
-  usePageTitle(`${site.name} | PC repair & tech support in Norwalk & Stamford, ${site.state}`)
+  usePageTitle(`${site.name} | PC repair & tech support in Fairfield County, ${site.state}`)
   const offer = featuredService
   const builds = shownPhotos(site.photos.builds)
   const bench = shownPhotos(site.photos.bench)
