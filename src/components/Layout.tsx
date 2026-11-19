@@ -112,20 +112,30 @@ function Header() {
           <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>
         </button>
       </div>
-      <div id="mobile-menu" ref={menuRef} className="mobile-menu" data-open={open} hidden={!open}>
-        <nav aria-label="Mobile">
-          {NAV.map((n) => (
-            <Link key={n.to} to={n.to}>
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-        <TextButton message={site.messages.default} className="btn-block" />
-        {site.spanish && (
-          <TextButton message={site.messages.spanish} subject={site.subjects.spanish} variant="secondary" lang="es" className="btn-block">
-            Enviar correo · Se habla español
-          </TextButton>
-        )}
+      <div id="mobile-menu" className="mobile-menu" data-open={open} inert={!open} aria-hidden={!open}>
+        <div className="mobile-menu-clip">
+          <div ref={menuRef} className="mobile-menu-inner">
+            <nav aria-label="Mobile">
+              {NAV.map((n) => (
+                <Link key={n.to} to={n.to}>
+                  {n.label}
+                </Link>
+              ))}
+            </nav>
+            <TextButton message={site.messages.default} className="btn-block" />
+            {site.spanish && (
+              <TextButton
+                message={site.messages.spanish}
+                subject={site.subjects.spanish}
+                variant="secondary"
+                lang="es"
+                className="btn-block"
+              >
+                Enviar correo · Se habla español
+              </TextButton>
+            )}
+          </div>
+        </div>
       </div>
     </header>
   )
