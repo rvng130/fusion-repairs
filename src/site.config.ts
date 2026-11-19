@@ -119,6 +119,18 @@ export const site = {
     buyback: 'Selling a device',
   },
 
+  /**
+   * YOUTUBE VIDEO — paste the link to your PC build video, e.g.
+   * 'https://www.youtube.com/watch?v=XXXXXXXXXXX' or 'https://youtu.be/XXXXXXXXXXX'.
+   * Leave '' to show an empty placeholder (or hide it with showPhotoPlaceholders: false).
+   */
+  youtube: {
+    url: 'https://www.youtube.com/watch?v=lo6jNB81ULY',
+    title: 'Watch us build a PC',
+    /** Optional line under the title, e.g. 'Ryzen 7 + RTX 4070 build, start to finish.' */
+    description: '',
+  },
+
   /** Prefilled email drafts. Brackets are for the customer to fill in. */
   messages: {
     default:
