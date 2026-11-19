@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { site } from '../site.config'
 import { areaText } from '../lib/sms'
-import { PhotoSlot } from '../components/PhotoSlot'
+import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 
 export function usePageTitle(title: string) {
   useEffect(() => {
@@ -105,5 +105,23 @@ export function LoopVideo() {
         />
       </div>
     </figure>
+  )
+}
+
+/** Big looping video on the left, bench photos beside it (stacks on phones). */
+export function BenchGallery() {
+  const bench = shownPhotos(site.photos.bench)
+  const hasVideo = !!site.photos.video.src
+  return (
+    <div className={`bench ${hasVideo ? '' : 'no-video'}`}>
+      {hasVideo && <LoopVideo />}
+      {bench.length > 0 && (
+        <div className="bench-photos">
+          {bench.map((p, i) => (
+            <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="auto" />
+          ))}
+        </div>
+      )}
+    </div>
   )
 }

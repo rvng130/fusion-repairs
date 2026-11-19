@@ -555,6 +555,39 @@ h1:focus,
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* On the bench: big video + photos */
+.bench {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.bench.no-video {
+  grid-template-columns: 1fr;
+}
+.bench-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  min-height: 0;
+}
+.bench-photos .photo:first-child {
+  grid-column: 1 / -1;
+}
+.bench-photos .photo,
+.bench-photos .photo-frame {
+  height: 100%;
+  min-height: 0;
+}
+.bench-photos .photo-frame {
+  position: relative;
+}
+.bench-photos .photo-frame img,
+.bench-photos .photo-empty {
+  position: absolute;
+  inset: 0;
+}
+
 /* YouTube */
 .yt-frame {
   aspect-ratio: 16 / 9;
@@ -914,6 +947,24 @@ body.no-scroll .mobile-bar {
   .gallery.four {
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
+  }
+  .bench {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .bench-photos {
+    grid-template-rows: auto;
+    gap: 14px;
+  }
+  .bench-photos .photo,
+  .bench-photos .photo-frame {
+    height: auto;
+  }
+  .bench-photos .photo-frame {
+    aspect-ratio: 4 / 5 !important;
+  }
+  .bench-photos .photo:first-child .photo-frame {
+    aspect-ratio: 4 / 3 !important;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;

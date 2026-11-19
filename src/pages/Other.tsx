@@ -3,8 +3,8 @@ import { areaText, displayPhone, phoneReady } from '../lib/sms'
 import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
 import { CopyButton } from '../components/CopyButton'
-import { BookingNotes, PageHero, Steps, TeamGrid, LoopVideo, usePageTitle } from './shared'
-import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
+import { BookingNotes, PageHero, Steps, TeamGrid, BenchGallery, usePageTitle } from './shared'
+import { shownPhotos } from '../components/PhotoSlot'
 
 export function HowItWorks() {
   usePageTitle(`How It Works | ${site.name}`)
@@ -59,15 +59,10 @@ export function About() {
           ))}
         </div>
       </section>
-      {bench.length > 0 && (
+      {(bench.length > 0 || site.photos.video.src) && (
         <section className="section">
           <div className="wrap">
-            <div className="gallery four">
-              <LoopVideo />
-              {bench.map((p, i) => (
-                <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
-              ))}
-            </div>
+            <BenchGallery />
           </div>
         </section>
       )}

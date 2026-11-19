@@ -5,7 +5,7 @@ import { TextButton } from '../components/TextButton'
 import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 import { IconArrow } from '../components/icons'
 import { YouTubeSection } from '../components/YouTube'
-import { BookingNotes, Steps, TeamGrid, LoopVideo, usePageTitle } from './shared'
+import { BookingNotes, Steps, TeamGrid, BenchGallery, usePageTitle } from './shared'
 
 export function Home() {
   usePageTitle(`${site.name} | PC repair & tech support in Norwalk & Stamford, ${site.state}`)
@@ -129,18 +129,13 @@ export function Home() {
         </div>
       </section>
 
-      {bench.length > 0 && (
+      {(bench.length > 0 || site.photos.video.src) && (
         <section className="section" aria-labelledby="bench-title">
           <div className="wrap">
             <div className="section-head">
               <h2 id="bench-title">On the bench</h2>
             </div>
-            <div className="gallery four">
-              <LoopVideo />
-              {bench.map((p, i) => (
-                <PhotoSlot key={i} photo={p} placeholder="Tech photo" ratio="4 / 5" />
-              ))}
-            </div>
+            <BenchGallery />
           </div>
         </section>
       )}
