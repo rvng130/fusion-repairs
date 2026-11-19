@@ -1,16 +1,16 @@
 /* ============ Fusion Repair — styles (cream / light) ============ */
 :root {
-  --bg: #f4eee3;
-  --paper: #faf6ee;
-  --sand: #ebe3d4;
-  --line: #ddd3c3;
-  --line-strong: #c4b7a2;
-  --text: #2f2a24;
-  --muted: #675e53;
-  --accent: #9a5236;
-  --accent-soft: #e9d6c8;
+  --bg: #f1f3ee;
+  --paper: #fafbf8;
+  --sand: #e4e8e0;
+  --line: #d6dbd2;
+  --line-strong: #b9c1b5;
+  --text: #232a27;
+  --muted: #59625d;
+  --accent: #3d6b55;
+  --accent-soft: #d5e3d9;
   --wrap: 1160px;
-  --serif: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+  --serif: 'Public Sans Variable', ui-sans-serif, system-ui, sans-serif;
   --sans: 'Public Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   color-scheme: light;
 }
@@ -48,9 +48,9 @@ h2,
 h3 {
   margin: 0;
   font-family: var(--serif);
-  font-weight: 450;
+  font-weight: 650;
   line-height: 1.08;
-  letter-spacing: -0.012em;
+  letter-spacing: -0.025em;
 }
 h1 {
   font-size: clamp(2.6rem, 5.6vw, 4.6rem);
@@ -121,8 +121,10 @@ h1:focus,
 }
 .eyebrow {
   font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.15rem;
+    font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 16px;
 }
@@ -278,13 +280,14 @@ h1:focus,
 }
 .logo {
   font-family: var(--serif);
-  font-size: 1.55rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   text-decoration: none;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 10px;
 }
 .nav-desktop {
   display: flex;
@@ -427,8 +430,7 @@ h1:focus,
 }
 .tagline-row p {
   font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
   padding: 26px 0;
   text-align: center;
 }
@@ -569,8 +571,7 @@ h1:focus,
 }
 .step-num {
   font-family: var(--serif);
-  font-style: italic;
-  color: var(--accent);
+    color: var(--accent);
   font-size: 1.1rem;
 }
 .privacy {
@@ -647,8 +648,7 @@ h1:focus,
 }
 .service-num {
   font-family: var(--serif);
-  font-style: italic;
-  color: var(--accent);
+    color: var(--accent);
   font-size: 1.1rem;
 }
 .service h2 {
@@ -759,7 +759,7 @@ h1:focus,
   width: min(92vw, 520px);
 }
 .dialog::backdrop {
-  background: rgba(47, 42, 36, 0.45);
+  background: rgba(35, 42, 39, 0.45);
 }
 .dialog-inner {
   padding: 28px;
