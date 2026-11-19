@@ -4,6 +4,7 @@ import { Link } from '../lib/router'
 import { TextButton } from '../components/TextButton'
 import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
 import { IconArrow } from '../components/icons'
+import { YouTubeSection } from '../components/YouTube'
 import { BookingNotes, Steps, TeamGrid, LoopVideo, usePageTitle } from './shared'
 
 export function Home() {
@@ -65,13 +66,9 @@ export function Home() {
         <section className="section flush" aria-labelledby="offer-title">
           <div className="wrap">
             <div className="offer">
-              <p className="offer-price" aria-hidden>
-                {formatPrice(offer)}
-              </p>
+              <p className="offer-price">{formatPrice(offer)}</p>
               <div>
-                <h2 id="offer-title">
-                  {offer.name}, <span className="nowrap">{formatPrice(offer)} flat</span>
-                </h2>
+                <h2 id="offer-title">{offer.name}</h2>
                 <p className="muted">{offer.description}</p>
                 <div className="cta-row">
                   <TextButton message={serviceMessage(offer)} subject={serviceSubject(offer)} ariaLabel={`Email us to book ${offer.name}`}>
@@ -105,6 +102,8 @@ export function Home() {
           </div>
         </section>
       )}
+
+      <YouTubeSection />
 
       <section className="section" aria-labelledby="how-title">
         <div className="wrap">
