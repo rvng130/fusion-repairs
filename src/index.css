@@ -785,6 +785,21 @@ h1:focus,
 .service h2 {
   font-size: 1.45rem;
 }
+.includes {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.includes li {
+  font-size: 0.85rem;
+  padding: 3px 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  color: var(--text);
+}
 .service-body .muted {
   margin-top: 4px;
   max-width: 56ch;
@@ -1122,7 +1137,8 @@ body.no-scroll .mobile-bar {
     margin-top: 10px;
   }
   .service {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
+    gap: 10px;
     padding: 22px 0;
   }
   .service-num {

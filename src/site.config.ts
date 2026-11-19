@@ -16,6 +16,8 @@ export type Service = {
   name: string
   /** One-line description */
   description: string
+  /** Optional short list of what's included, shown under the description */
+  includes?: string[]
   /** Number in dollars, or null to show "Request a quote" */
   price: number | null
   /** Optional small note shown next to the price, e.g. "local house call" */
@@ -148,57 +150,49 @@ export const site = {
 
   services: [
     {
-      id: 'pc-laptop-repair',
-      name: 'PC & laptop repair',
-      description: "Won't turn on, won't boot, cracked hinge, bad port. Tell us what's going on.",
+      id: 'computer-repair',
+      name: 'Computer repair & troubleshooting',
+      description: "PC or laptop acting up? Tell us what's going on and we'll find the cause and fix it.",
+      includes: [
+        'Hardware diagnostics',
+        "Won't turn on / won't boot",
+        'Virus & malware removal',
+        'Windows installation & software support',
+      ],
       price: null,
       message:
-        "Hi Fusion Repair, I need my [PC/laptop model] repaired. The issue is [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repair, I need help with my [PC/laptop model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
-      id: 'diagnostics',
-      name: 'Hardware diagnostics & troubleshooting',
-      description: 'Crashing, overheating, strange noises, random restarts. We track down the cause.',
+      id: 'remote-quick-assist',
+      name: 'Remote Quick Assist computer help',
+      description:
+        "Quick fixes without leaving home. We connect to your Windows PC with Microsoft's built-in Quick Assist and fix it while you watch. You start the session, and we'll never call you first asking to connect.",
+      includes: ['Software, settings & slow-computer fixes', 'Setup help & how-to questions'],
       price: null,
       message:
-        "Hi Fusion Repair, I'd like my [device/model] diagnosed. What's happening: [short description]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repair, I'd like remote help with my Windows [PC/laptop]. The issue is [short description]. Good times to connect: [days/times].",
       visible: true,
     },
     {
-      id: 'upgrades',
-      name: 'Hardware upgrades',
-      description: 'RAM, SSD, GPU, and more. We help you pick the part and install it.',
+      id: 'upgrades-builds',
+      name: 'Upgrades & custom PC builds',
+      description: 'Speed up what you have or get a new build. Tell us your budget and what you want to run.',
+      includes: ['RAM, SSD & GPU upgrades', 'Part picking for your budget', 'Custom PC builds'],
       price: null,
       message:
-        "Hi Fusion Repair, I'd like to upgrade the [RAM/SSD/GPU] in my [PC/laptop model]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repair, I'm interested in [an upgrade/a custom PC build]. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
-      id: 'windows-software',
-      name: 'Windows installation & software support',
-      description: 'Fresh Windows installs, updates gone wrong, and programs that won\'t cooperate.',
+      id: 'phone-help',
+      name: 'Phone help',
+      description: 'New phone or one acting weird, we can help.',
+      includes: ['Data transfer to a new phone (photos, contacts, messages)', 'Phone troubleshooting'],
       price: null,
       message:
-        "Hi Fusion Repair, I need help with [Windows install/software issue] on my [PC/laptop model]. I'm near [Norwalk/Stamford].",
-      visible: true,
-    },
-    {
-      id: 'virus-removal',
-      name: 'Virus & malware removal',
-      description: 'Pop-ups, slowdowns, or something you clicked that you shouldn\'t have.',
-      price: null,
-      message:
-        "Hi Fusion Repair, I think my [PC/laptop model] has a virus. What I'm seeing: [short description]. I'm near [Norwalk/Stamford].",
-      visible: true,
-    },
-    {
-      id: 'custom-pc',
-      name: 'Custom PC builds',
-      description: 'Tell us your budget and what you want to run. We help pick the parts and build it.',
-      price: null,
-      message:
-        "Hi Fusion Repair, I'm interested in a custom PC build. Budget: [budget]. I'll mainly use it for [gaming/work/streaming]. I'm near [Norwalk/Stamford].",
+        "Hi Fusion Repair, I'd like help with my [phone model]. I need [data transfer/troubleshooting]: [short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
     {
@@ -208,33 +202,6 @@ export const site = {
       price: 50,
       message:
         "Hi Fusion Repair, I'd like to book a ${price} console cleaning for my [PS5/Xbox model]. I'm near [Norwalk/Stamford].",
-      visible: true,
-    },
-    {
-      id: 'phone-transfer',
-      name: 'Phone data transfer',
-      description: 'Moving to a new phone? We help bring over your photos, contacts, and messages.',
-      price: null,
-      message:
-        "Hi Fusion Repair, I'd like help moving my data from my [old phone model] to my [new phone model]. I'm near [Norwalk/Stamford].",
-      visible: true,
-    },
-    {
-      id: 'phone-troubleshooting',
-      name: 'Phone troubleshooting',
-      description: "Settings, apps, storage, or something acting weird. We'll take a look.",
-      price: null,
-      message:
-        "Hi Fusion Repair, I'd like help with my [phone model]. The issue is [short description]. I'm near [Norwalk/Stamford].",
-      visible: true,
-    },
-    {
-      id: 'tech-support',
-      name: 'General tech support',
-      description: "Not sure what category it falls under? Email us anyway.",
-      price: null,
-      message:
-        "Hi Fusion Repair, I have a tech question about my [device]. [Short description]. I'm near [Norwalk/Stamford].",
       visible: true,
     },
 

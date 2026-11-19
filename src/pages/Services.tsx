@@ -11,7 +11,7 @@ export function Services() {
         <p className="lede">{site.bio.intro}</p>
         <p className="muted about-more">
           Flat prices where we can. For everything else, email us the model and the problem and we'll quote it before any
-          work starts.
+          work starts. Not sure which one you need? Email us anyway.
         </p>
         <BookingNotes />
       </PageHero>
@@ -27,6 +27,13 @@ export function Services() {
                 <div className="service-body">
                   <h2>{s.name}</h2>
                   <p className="muted">{s.description}</p>
+                  {s.includes && s.includes.length > 0 && (
+                    <ul className="includes">
+                      {s.includes.map((x) => (
+                        <li key={x}>{x}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
                 <p className={s.price === null ? 'quote' : 'price big'}>
                   {formatPrice(s)}

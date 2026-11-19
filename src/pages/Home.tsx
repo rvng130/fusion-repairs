@@ -87,7 +87,7 @@ export function Home() {
             <div className="section-head">
               <h2 id="builds-title">PCs we've built</h2>
               <TextButton
-                message={visibleServices.find((s) => s.id === 'custom-pc')?.message ?? site.messages.default}
+                message={visibleServices.find((s) => s.id === 'upgrades-builds')?.message ?? site.messages.default}
                 subject="Custom PC build"
                 variant="secondary"
               >
