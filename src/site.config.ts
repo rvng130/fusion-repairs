@@ -305,8 +305,8 @@ export const site = {
   team: [
     // role: optional title shown under the name (leave '' for none)
     // Photo: put the file in /public/photos (e.g. public/photos/andrew.jpg) and set photo: '/photos/andrew.jpg'
-    { name: 'Andrew Ishikawa', role: '', photo: '/photos/andrew.jpg' },
-    { name: 'Daniel Sarria', role: '', photo: '' },
+    { name: 'Andrew', role: '', photo: '/photos/andrew.jpg' },
+    { name: 'Daniel', role: '', photo: '/photos/daniel.jpg' },
   ],
 }
 
