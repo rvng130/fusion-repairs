@@ -185,6 +185,12 @@ function Footer() {
           ))}
         </nav>
         <div>
+          <p className="label">Email</p>
+          <p>
+            <a href={`mailto:${site.email}`} className="footer-email">
+              {site.email}
+            </a>
+          </p>
           <p className="label">We accept</p>
           <p>{site.payments.join(' · ')}</p>
           <TextButton message={site.messages.default} variant="secondary" />

@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { site } from '../site.config'
 import { areaText } from '../lib/sms'
 import { PhotoSlot, shownPhotos } from '../components/PhotoSlot'
+import { EmailLine } from '../components/EmailLine'
 
 export function usePageTitle(title: string) {
   useEffect(() => {
@@ -11,10 +12,13 @@ export function usePageTitle(title: string) {
 
 export function BookingNotes({ center = false }: { center?: boolean }) {
   return (
-    <ul className={`notes ${center ? 'center' : ''}`}>
-      <li>Local pickup and drop-off available by appointment</li>
-      {site.spanish && <li lang="es">Se habla español</li>}
-    </ul>
+    <>
+      <ul className={`notes ${center ? 'center' : ''}`}>
+        <li>Local pickup and drop-off available by appointment</li>
+        {site.spanish && <li lang="es">Se habla español</li>}
+      </ul>
+      <EmailLine center={center} />
+    </>
   )
 }
 

@@ -456,6 +456,46 @@ h1:focus,
   justify-content: center;
 }
 
+/* Visible email address fallback */
+.email-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin-top: 14px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.email-line a {
+  color: var(--text);
+  font-weight: 600;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.email-line a:hover {
+  color: var(--accent);
+}
+.email-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 0 10px;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.email-copy:hover {
+  border-color: var(--text);
+}
+.footer-email {
+  overflow-wrap: anywhere;
+}
+
 /* Tagline strip */
 .tagline {
   border-top: 1px solid var(--line);
